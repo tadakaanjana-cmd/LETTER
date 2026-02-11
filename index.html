@@ -95,7 +95,7 @@
 <body>
 
   <!-- 🎹 Background Piano Music -->
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" loop autoplay muted>
     <source src="piano.mp3" type="audio/mpeg">
   </audio>
 
@@ -128,29 +128,49 @@
   <script src="love letter 2.js"></script>
 
   <script>
-    // 🎹 Auto-play safe music (starts after interaction)
-    document.body.addEventListener("click", function() {
-      document.getElementById("bgMusic").play();
-    }, { once: true });
+// 🎵 Start music on page load (safe autoplay method)
+window.addEventListener("load", function () {
+  let music = document.getElementById("bgMusic");
 
-    // 💌 Auto open envelope
-    setTimeout(function() {
-      $("#envelope").removeClass("close").addClass("open");
-      createParticles();
-    }, 1500);
+  music.play().then(() => {
+    music.muted = false;   // Unmute after play starts
+    music.volume = 0;
+
+    // Smooth fade in
+    let fadeIn = setInterval(function () {
+  if (music.volume < 1) {
+    music.volume = Math.min(music.volume + 0.05, 1);
+  } else {
+    clearInterval(fadeIn);
+  }
+}, 200);
+  }).catch(() => {
+    // If autoplay blocked, wait for first click
+    document.body.addEventListener("click", function () {
+      music.muted = false;
+      music.volume = 1;
+      music.play();
+    }, { once: true });
+  });
+});
 
     // ✨ Create glowing particles
-    function createParticles() {
-      for (let i = 0; i < 25; i++) {
-        let particle = document.createElement("div");
-        particle.className = "particle";
-        particle.style.left = Math.random() * window.innerWidth + "px";
-        particle.style.top = window.innerHeight + "px";
-        document.body.appendChild(particle);
+function createParticles() {
+  for (let i = 0; i < 25; i++) {
+    let particle = document.createElement("div");
+    particle.className = "particle";
+    particle.style.left = Math.random() * window.innerWidth + "px";
+    particle.style.top = window.innerHeight + "px";
+    document.body.appendChild(particle);
 
-        setTimeout(() => particle.remove(), 4000);
-      }
-    }
+    setTimeout(() => particle.remove(), 4000);
+  }
+}
+
+// Trigger particles when envelope opens
+document.getElementById("open").addEventListener("click", function() {
+  createParticles();
+});
 
 // 🌙 Fade to black + music fade out
 setTimeout(function() {
@@ -185,4 +205,5 @@ setTimeout(function() {
   
 </body>
 </html>
+
 
