@@ -56,7 +56,7 @@
   transition: background 2s ease;
 }
 
-.fade-black .envlope-wrapper,
+.fade-black .envelope-wrapper,
 .fade-black .reset,
 .fade-black .hearts,
 .fade-black .letter {
@@ -87,6 +87,12 @@
 
 #finalMessage.show {
   opacity: 1;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ffffff; }
+  to { text-shadow: 0 0 20px #ff9ecb; }
 }
 
   </style>
@@ -99,7 +105,7 @@
     <source src="piano.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="envlope-wrapper">
+  <div class="envelope-wrapper">
     <div id="envelope" class="close">
       <div class="front flap"></div>
       <div class="front pocket"></div>
@@ -167,35 +173,41 @@ function createParticles() {
   }
 }
 
-// Trigger particles when envelope opens
-document.getElementById("open").addEventListener("click", function() {
+// Trigger particles + fade effect when envelope opens
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("open").addEventListener("click", function() {
+
   createParticles();
+
+  // Wait 6 seconds after opening before fading
+  setTimeout(function() {
+
+    document.body.classList.add("fade-black");
+
+    let music = document.getElementById("bgMusic");
+
+    if (!music.paused) {
+      let fadeAudio = setInterval(function () {
+        if (music.volume > 0.05) {
+          music.volume -= 0.05;
+        } else {
+          music.volume = 0;
+          clearInterval(fadeAudio);
+          music.pause();
+        }
+      }, 200);
+    }
+
+    // Show final message after fade starts
+    setTimeout(function() {
+      document.getElementById("finalMessage").classList.add("show");
+    }, 2500);
+
+  }, 6000); // fade starts 6 seconds after clicking open
+    
+  });
 });
 
-// 🌙 Fade to black + music fade out
-setTimeout(function() {
-  document.body.classList.add("fade-black");
-
-  let music = document.getElementById("bgMusic");
-
-  if (!music.paused) {
-    let fadeAudio = setInterval(function () {
-      if (music.volume > 0.05) {
-        music.volume -= 0.05;
-      } else {
-        music.volume = 0;
-        clearInterval(fadeAudio);
-        music.pause();
-      }
-    }, 200);
-  }
-
-}, 12000);
-
-// ✨ Show final message slightly after black screen
-setTimeout(function() {
-  document.getElementById("finalMessage").classList.add("show");
-}, 14500);
 </script>
 
 <!-- 🌙 Final Message Screen (THIS MUST BE OUTSIDE SCRIPT) -->
@@ -205,5 +217,6 @@ setTimeout(function() {
   
 </body>
 </html>
+
 
 
