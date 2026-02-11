@@ -1,41 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Love letter for hubby</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="love letter 2.css" />
-  </head>
-  <body>
-    <!-- tiktok meowish -->
-    <div class="envlope-wrapper">
-      <div id="envelope" class="close">
-        <div class="front flap"></div>
-        <div class="front pocket"></div>
-        <div class="letter">
-          <div class="words line1">To: My Potato</div>
-          <div class="words line2">Dear Love, every love story is</div>
-          <div class="words line3">special, but ours is my</div>
-          <div class="words line4">favorite, HBD,</div>
-        </div>
-        <div class="hearts">
-          <div class="heart a1"></div>
-          <div class="heart a2"></div>
-          <div class="heart a3"></div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Love letter for hubby</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="love letter 2.css" />
+
+  <style>
+    /* ✨ Page Fade In */
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #fff5f7, #ffe4ec);
+      opacity: 0;
+      animation: fadeInPage 2s ease forwards;
+      overflow: hidden;
+    }
+
+    @keyframes fadeInPage {
+      to { opacity: 1; }
+    }
+
+    /* 💓 Heartbeat when open */
+    #envelope.open {
+      animation: heartbeat 2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    /* ✍ Signature Fade */
+    .signature {
+      opacity: 0;
+      margin-top: 20px;
+      font-size: 22px;
+      animation: fadeInSignature 2s ease 4s forwards;
+    }
+
+    @keyframes fadeInSignature {
+      to { opacity: 1; }
+    }
+
+    /* ✨ Glowing Particles */
+    .particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: #ff9ecb;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    /* 🌙 Fade to black */
+.fade-black {
+  background: black;
+  transition: background 2s ease;
+}
+
+.fade-black .envlope-wrapper,
+.fade-black .reset,
+.fade-black .hearts,
+.fade-black .letter {
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+@keyframes fadeToBlack {
+  to {
+    background: black;
+  }
+}
+
+/* ✨ Final Text Styling */
+#finalMessage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'Dancing Script', cursive;
+  font-size: 42px;
+  opacity: 0;
+  letter-spacing: 2px;
+  text-align: center;
+  transition: opacity 3s ease;
+}
+
+#finalMessage.show {
+  opacity: 1;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- 🎹 Background Piano Music -->
+  <audio id="bgMusic" loop>
+    <source src="piano.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="envlope-wrapper">
+    <div id="envelope" class="close">
+      <div class="front flap"></div>
+      <div class="front pocket"></div>
+
+      <div class="letter">
+        <div class="words line1">To: My Potato</div>
+        <div class="words line2">Dear Love, every love story is</div>
+        <div class="words line3">special, but ours is my</div>
+        <div class="words line4">favorite. Happy Birthday ❤️</div>
+
+        <div class="words signature">
+          Yours forever,<br>
+          Kodee
         </div>
       </div>
-    </div>
-    <div class="reset">
-      <button id="open">Open</button>
-      <button id="reset">Close</button>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="love letter 2.js"></script>
-  </body>
+      <div class="hearts">
+        <div class="heart a1"></div>
+        <div class="heart a2"></div>
+        <div class="heart a3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reset">
+    <button id="open">Open</button>
+    <button id="reset">Close</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="love letter 2.js"></script>
+
+  <script>
+    // 🎹 Auto-play safe music (starts after interaction)
+    document.body.addEventListener("click", function() {
+      document.getElementById("bgMusic").play();
+    }, { once: true });
+
+    // 💌 Auto open envelope
+    setTimeout(function() {
+      $("#envelope").removeClass("close").addClass("open");
+      createParticles();
+    }, 1500);
+
+    // ✨ Create glowing particles
+    function createParticles() {
+      for (let i = 0; i < 25; i++) {
+        let particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * window.innerWidth + "px";
+        particle.style.top = window.innerHeight + "px";
+        document.body.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 4000);
+      }
+    }
+
+// 🌙 Fade to black + music fade out
+setTimeout(function() {
+  document.body.classList.add("fade-black");
+
+  let music = document.getElementById("bgMusic");
+
+  if (!music.paused) {
+    let fadeAudio = setInterval(function () {
+      if (music.volume > 0.05) {
+        music.volume -= 0.05;
+      } else {
+        music.volume = 0;
+        clearInterval(fadeAudio);
+        music.pause();
+      }
+    }, 200);
+  }
+
+}, 12000);
+
+// ✨ Show final message slightly after black screen
+setTimeout(function() {
+  document.getElementById("finalMessage").classList.add("show");
+}, 14500);
+</script>
+
+<!-- 🌙 Final Message Screen (THIS MUST BE OUTSIDE SCRIPT) -->
+<div id="finalMessage">
+  Forever Begins Here.
+</div>
+  
+</body>
 </html>
-
