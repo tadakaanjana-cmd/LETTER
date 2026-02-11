@@ -17,6 +17,7 @@
       opacity: 0;
       animation: fadeInPage 2s ease forwards;
       overflow: hidden;
+      transition: background 2s ease;
     }
 
     @keyframes fadeInPage {
@@ -52,8 +53,7 @@
 
     /* 🌙 Fade to black */
 .fade-black {
-  background: black;
-  transition: background 2s ease;
+  background: black !important;
 }
 
 .fade-black .envelope-wrapper,
@@ -174,12 +174,10 @@ function createParticles() {
 }
 
 // Trigger particles + fade effect when envelope opens
-document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("open").addEventListener("click", function() {
+document.getElementById("open").addEventListener("click", function() {
 
   createParticles();
 
-  // Wait 6 seconds after opening before fading
   setTimeout(function() {
 
     document.body.classList.add("fade-black");
@@ -198,14 +196,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }, 200);
     }
 
-    // Show final message after fade starts
     setTimeout(function() {
       document.getElementById("finalMessage").classList.add("show");
     }, 2500);
 
-  }, 6000); // fade starts 6 seconds after clicking open
-    
-  });
+  }, 7000); // wait for letter animation
+
 });
 
 </script>
@@ -217,6 +213,3 @@ document.addEventListener("DOMContentLoaded", function() {
   
 </body>
 </html>
-
-
-
