@@ -3,6 +3,7 @@
   perspective: 1000px;
   width: 400px;
   height: 250px;
+  overflow: hidden;
   margin: 80px auto 0 auto;
   background-color: #d9534f;
   border-bottom-left-radius: 6px;
@@ -106,15 +107,17 @@
 
 .hearts {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;   /* slightly inside envelope */
   left: 0;
   width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 2;
 }
 
 .heart {
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   pointer-events: none;
 }
 
@@ -184,18 +187,19 @@
 
 @-webkit-keyframes slideUp {
   0% {
-    top: 0;
+    bottom: 20px;
   }
   100% {
-    top: -100vh;
+    bottom: 260px; /* slightly more than envelope height */
   }
 }
+
 @keyframes slideUp {
   0% {
-    top: 0;
+    bottom: 20px;
   }
   100% {
-    top: -100vh;
+    bottom: 260px; /* slightly more than envelope height */
   }
 }
 @-webkit-keyframes sideSway {
@@ -265,5 +269,4 @@
   }
 
 }
-
 
