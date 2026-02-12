@@ -3,7 +3,6 @@
   perspective: 1000px;
   width: 400px;
   height: 250px;
-  overflow: visible;
   margin: 80px auto 0 auto;
   background-color: #d9534f;
   border-bottom-left-radius: 6px;
@@ -107,10 +106,9 @@
 
 .hearts {
   position: absolute;
-  bottom: 10px;   /* slightly inside envelope */
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   pointer-events: none;
   z-index: 2;
 }
@@ -190,7 +188,7 @@
     bottom: 20px;
   }
   100% {
-    bottom: 260px; /* slightly more than envelope height */
+    bottom: 260px;
   }
 }
 
@@ -199,15 +197,7 @@
     bottom: 20px;
   }
   100% {
-    bottom: 260px; /* slightly more than envelope height */
-  }
-}
-@-webkit-keyframes sideSway {
-  0% {
-    margin-left: 0px;
-  }
-  100% {
-    margin-left: 50px;
+    bottom: 260px;
   }
 }
 @keyframes sideSway {
@@ -255,19 +245,4 @@
   background-color: #d9534f;
   color: #fff;
 }
-
-@media (max-width: 480px) {
-
-  .envelope-wrapper {
-    transform: scale(0.8);
-    transform-origin: top center;
-    padding-top: 30px;
-  }
-
-  .reset {
-    margin-top: -30px;
-  }
-
-}
-
 
