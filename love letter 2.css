@@ -1,7 +1,7 @@
 #envelope {
   position: relative;
-  width: 400px;
-  height: 250px;
+  width: min(90vw, 400px);
+  height: calc(min(90vw, 400px) * 0.625);
   margin: 80px auto 0 auto;
   background-color: #d9534f;
   border-bottom-left-radius: 6px;
@@ -17,8 +17,8 @@
 }
 
 .flap {
-  border-left: 140px solid transparent;
-  border-right: 140px solid transparent;
+  border-left: calc(min(90vw, 400px) / 2) solid transparent;
+  border-right: calc(min(90vw, 400px) / 2) solid transparent;
   border-bottom: 82px solid transparent;
   /* a little smaller */
   border-top: 98px solid #d9534f; /* Same romantic red */
@@ -28,8 +28,8 @@
 }
 
 .pocket {
-  border-left: 140px solid #f5a3a2; /* Soft pinkish red for the pocket */
-  border-right: 140px solid #f5a3a2;
+  border-left: calc(min(90vw, 400px) / 2) solid #f5a3a2; /* Soft pinkish red for the pocket */
+  border-right: calc(min(90vw, 400px) / 2) solid #f5a3a2;
   border-bottom: 90px solid #ff6f61; /* Lighter romantic red */
   border-top: 90px solid transparent;
   border-bottom-left-radius: 6px;
@@ -259,18 +259,4 @@
 .reset button:hover {
   background-color: #d9534f;
   color: #fff;
-}
-
-@media (max-width: 480px) {
-  .envelope-wrapper {
-    transform: scale(0.75);
-    transform-origin: top center;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-  .envelope-wrapper {
-    transform: scale(0.85);
-    transform-origin: top center;
-  }
 }
