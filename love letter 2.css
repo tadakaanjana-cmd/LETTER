@@ -1,7 +1,7 @@
 #envelope {
   position: relative;
-  width: min(90vw, 400px);
-  height: calc(min(90vw, 400px) * 0.625);
+  width: 400px;
+  height: 250px;
   margin: 80px auto 0 auto;
   background-color: #d9534f;
   border-bottom-left-radius: 6px;
@@ -259,4 +259,29 @@
 .reset button:hover {
   background-color: #d9534f;
   color: #fff;
+}
+
+/* 📱 Mobile */
+@media (max-width: 480px) {
+
+  #envelope {
+    transform: scale(0.75);
+    transform-origin: top center;
+  }
+
+  .reset {
+    margin-top: -40px;
+  }
+
+}
+
+
+/* 📲 Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+
+  #envelope {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+
 }
