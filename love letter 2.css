@@ -1,7 +1,3 @@
-body {
-  background: blue !important;
-}
-
 #envelope {
   position: relative;
   width: 400px;
@@ -316,4 +312,5 @@ body {
   }
 
 }
+
 
