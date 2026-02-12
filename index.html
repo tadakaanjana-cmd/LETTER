@@ -17,7 +17,8 @@
       background: radial-gradient(circle at center, #fff5f7, #ffe4ec);
       opacity: 0;
       animation: fadeInPage 2s ease forwards;
-      overflow: hidden;
+      overflow-x: hidden;   /* only prevent side scroll */
+      overflow-y: auto;     /* allow vertical scaling */
       transition: background 2s ease;
     }
 
@@ -216,5 +217,6 @@ document.getElementById("open").addEventListener("click", function() {
   
 </body>
 </html>
+
 
 
